@@ -1,0 +1,21 @@
+name: basic_animated_text
+description: `BasicAnimatedText` is a custom Flutter widget designed to create an animated text effect where the text appears and then deletes itself character by character.
+version: 1.0.0
+homepage: https://github.com/altaysakarya/basic_animated_text
+repository: https://github.com/altaysakarya/basic_animated_text.git
+documentation: https://github.com/altaysakarya/basic_animated_text/blob/master/README.md
+
+environment:
+  sdk: '>=3.1.3 <4.0.0'
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+flutter:

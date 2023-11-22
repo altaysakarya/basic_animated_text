@@ -1,15 +1,17 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'dart:async';
 
 import 'package:flutter/material.dart';
 
 class BasicAnimatedText extends StatefulWidget {
-  final String text;
+  final List<String> texts;
   final Duration? writeDuration;
   final Duration? deleteDuration;
   final TextStyle? textStyle;
   const BasicAnimatedText({
     super.key,
-    required this.text,
+    required this.texts,
     this.writeDuration,
     this.deleteDuration,
     this.textStyle,
@@ -20,8 +22,9 @@ class BasicAnimatedText extends StatefulWidget {
 }
 
 class _BasicAnimatedTextState extends State<BasicAnimatedText> {
-  late String text;
+  late List<String> texts;
   String displayedText = "";
+  int textIndex = 0;
   int charIndex = 0;
   Timer? timer;
   bool isDeleting = false;
@@ -31,33 +34,34 @@ class _BasicAnimatedTextState extends State<BasicAnimatedText> {
   @override
   void initState() {
     super.initState();
-    text = widget.text;
+    texts = widget.texts;
     writeDuration = widget.writeDuration ?? const Duration(milliseconds: 150);
-    writeDuration = widget.deleteDuration ?? const Duration(milliseconds: 50);
+    deleteDuration = widget.deleteDuration ?? const Duration(milliseconds: 50);
     timer = Timer.periodic(writeDuration, (Timer t) => _updateText());
   }
 
   void _updateText() {
     if (mounted) {
-      setState(() {
-        if (isDeleting) {
-          displayedText = text.substring(0, charIndex);
-          charIndex--;
-          if (charIndex == 0) {
-            isDeleting = false;
-            timer?.cancel();
-            timer = Timer.periodic(writeDuration, (Timer t) => _updateText());
-          }
-        } else {
-          displayedText = text.substring(0, charIndex);
-          charIndex++;
-          if (charIndex == text.length) {
-            isDeleting = true;
-            timer?.cancel();
-            timer = Timer.periodic(deleteDuration, (Timer t) => _updateText());
-          }
+      String text = texts.elementAt(textIndex);
+      if (isDeleting) {
+        displayedText = text.substring(0, charIndex);
+        charIndex--;
+        if (charIndex == 0) {
+          isDeleting = false;
+          timer?.cancel();
+          timer = Timer.periodic(writeDuration, (Timer t) => _updateText());
+          textIndex == widget.texts.length - 1 ? textIndex = 0 : textIndex++;
         }
-      });
+      } else {
+        displayedText = text.substring(0, charIndex);
+        charIndex++;
+        if (charIndex == text.length) {
+          isDeleting = true;
+          timer?.cancel();
+          timer = Timer.periodic(deleteDuration, (Timer t) => _updateText());
+        }
+      }
+      setState(() {});
     }
   }
 

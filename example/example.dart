@@ -13,7 +13,7 @@ class Main extends StatelessWidget {
     return const MaterialApp(
       home: Scaffold(
         body: Center(
-          child: BasicAnimatedText(text: 'Hello, world!'),
+          child: BasicAnimatedText(texts: ['Hello, world!', 'Hello, Flutter!']),
         ),
       ),
     );

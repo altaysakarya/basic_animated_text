@@ -7,7 +7,7 @@
 
 ## Features
 
-**Customizable Text**: Set any string as the animated text.
+**Customizable Texts**: Set any `List<String>` as the animated texts.
 **Configurable Durations**: Specify the duration for both the writing and deleting animations.
 **Custom Text Styles**: Apply any `TextStyle` to the animated text.
 
@@ -23,7 +23,7 @@ Implement the widget in your Flutter app:
 
 ```dart
 BasicAnimatedText(
-  text: "Your Animated Text Here",
+  texts: "Your Animated Text Here".split(' '), //['Your', 'Animated', 'Text', 'Here']
   writeDuration: Duration(milliseconds: 150),
   deleteDuration: Duration(milliseconds: 50),
   textStyle: TextStyle(fontSize: 24, color: Colors.black),
@@ -32,7 +32,7 @@ BasicAnimatedText(
 
 ## Parameters
 
-`text` (String, required): The text to animate.
+`texts` (`List<String>`, required): The texts to animate.
 `writeDuration` (Duration, optional): Duration for each character to be written. Default is 150 milliseconds.
 `deleteDuration` (Duration, optional): Duration for each character to be deleted. Default is 50 milliseconds.
 `textStyle` (TextStyle, optional): Style for the text. Default is `TextStyle(fontSize: 24)`.
@@ -43,7 +43,7 @@ BasicAnimatedText(
 
 ```dart
 BasicAnimatedText(
-  text: "Hello, Flutter!",
+  texts: "Your Animated Text Here".split(' '), //['Your', 'Animated', 'Text', 'Here']
   writeDuration: Duration(milliseconds: 200),
   deleteDuration: Duration(milliseconds: 100),
   textStyle: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
